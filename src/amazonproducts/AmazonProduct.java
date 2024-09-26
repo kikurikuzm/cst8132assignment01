@@ -79,6 +79,9 @@ String imageURL, String link, float rating, int numberOfRatings, float discountP
 	}
 	
 	public String toString() {
-		//to string
+		return ("Product ID:" + this.id + ", Name: "+this.name+", Title: "+this.title+",Category: "+this.category+
+				", Subcategory: "+this.subCategory+", \nImage URL: "+this.imageURL+", \nProduct Page: "+this.link+
+				", \nRating: "+this.rating+", Number of ratings: "+this.numberOfRatings+", Discount Price: "+this.discountPrice+
+				", Normal Price: "+this.actualPrice);
 	}
 }
