@@ -3,7 +3,7 @@ package amazonproducts;
 import java.util.ArrayList;
 
 public class AmazonProductList {
-	private final int NUMCOLS = 0;
+	private final int NUMCOLS = 10;
 	private final ArrayList<String> DEFAULT_TITLE; //idk what the default is supposed to be
 	private ArrayList<AmazonProduct> bestsellers;
 	
