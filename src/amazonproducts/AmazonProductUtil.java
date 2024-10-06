@@ -7,60 +7,56 @@ public class AmazonProductUtil {
 		return Float.parseFloat(desiredString);
 	}
 		
-	public static String[] lineReader(String fileName, int lineIndex) {
+	public static String[] lineReader(String fileName, int desiredLineIndex) {
 		try {
 			FileReader fileReader = new FileReader(fileName);
 			
 			int currentLineIndex = 0;
 			int currentColumn = 0;
 			String currentString = "";
-			String[] currentCSVArray = new String[10];
+			String[] currentCSVArray = new String[9];
+			//indices and their corresponding column:
+			//0=name, 1=main_category, 2=sub_category, 3=image_link, 4=product_link,
+			//5=product_rating, 6=amount_of_ratings, 7=discount_price, 8=actual_price
 			
-			while (currentLineIndex <= lineIndex) 
+			while (currentLineIndex <= desiredLineIndex) 
 				try {
 					Character currentCharacter = (char)fileReader.read(); // read first character of line 0 to start off
 					
-					// while loop to make the fileReader pass the first line of "column title" CSV data
-					while (currentCharacter != '\n') { // read until the end of the line
-						currentCharacter = (char)fileReader.read(); // read the next character
-						if (currentCharacter == '\n') { // if we just got to the end of the line...
-							currentLineIndex ++; // ...increment the current line index and...
-						}
-					}
-					currentCharacter = (char)fileReader.read(); // ...read the first character on the second line
-					
-					while(currentLineIndex != lineIndex) { // if I'm reading the wrong line rn
+					while(currentLineIndex != desiredLineIndex) { // if I'm reading the wrong line rn
 						while (currentCharacter != '\n') { // read until the end of the line
 							currentCharacter = (char)fileReader.read();
-							if (currentCharacter == '\n') { // if we just got to the end of the line...
-								currentLineIndex ++; // ...increment the current line index and loop until I'm on the right line
-							}
+						} if (currentCharacter == '\n') { // if we just got to the end of the line...
+							currentCharacter = (char)fileReader.read();
+							currentLineIndex ++; // ...increment the current line index and loop until I'm on the right line
 						}
 					}
 					
 					// reading the correct line number
-					while (currentLineIndex == lineIndex) { // I am finally reading the right line
+					while (currentLineIndex == desiredLineIndex) { // I am finally reading the right line
 						
 						// case where commas must be extracted with data from inside double quotes
 						do { // this do-while accommodates for one column potentially having several values inside quotes
-							if (currentCharacter == '"') {
+							if (currentCharacter.equals('"')) {
 								currentCharacter = (char)fileReader.read(); // go to next character after the opening quote
-								while (currentCharacter != '"') { // read all characters up until closing quote
+								while (!currentCharacter.equals('"')) { // read all characters up until closing quote
 									currentString += currentCharacter; // read non-quotes into string
 									currentCharacter = (char)fileReader.read(); // reader will be on closing quote on last iteration
 								}
 								currentCharacter = (char)fileReader.read(); // read next character after closing quote
+							} else {
+								break; //breaks if the character isn't a quote to avoid infinite while loop 
 							}
-						} while (currentCharacter != ',' && currentCharacter != '\n'); // reader will be on a delimiting comma on last iteration (except at EOL)
+						} while (!currentCharacter.equals(',') && !currentCharacter.equals('\n')); // reader will be on a delimiting comma on last iteration (except at EOL)
 						
 						// case where column data does not have quotes
-						while (currentCharacter != ',' && currentCharacter != '\n') {
+						while (!currentCharacter.equals(',') && !currentCharacter.equals('\n') && !currentCharacter.equals('\r')) {
 							currentString += currentCharacter;
 							currentCharacter = (char)fileReader.read();  // reader will be on a delimiting comma on last iteration (except at EOL)
 						}
 						
 						// at this point, currentCharacter must be either , or \n
-						if (currentCharacter == ',') {
+						if (currentCharacter.equals(',') || currentCharacter.equals('\r')) { //checks for \r as it comes before the newline (\n) of each line
 							// column incrementing process
 							currentCSVArray[currentColumn] = currentString; // store data
 							currentColumn++; // next column

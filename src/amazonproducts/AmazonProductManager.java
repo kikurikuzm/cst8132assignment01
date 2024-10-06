@@ -31,8 +31,11 @@ public class AmazonProductManager {
 		
 	}
 	
-	public AmazonProduct createProduct(int number) { //update variable name
-
+	public static void createProduct(int lineToRead) { //update variable name
+		String[] stringArrayReturned = AmazonProductUtil.lineReader("Backpacks.csv", lineToRead);
+		for(int i = 0; i < stringArrayReturned.length; i++) {
+			System.out.println(stringArrayReturned[i]);
+		}
 	}
 	
 	public void showMenu() {
@@ -48,6 +51,6 @@ public class AmazonProductManager {
 	}
 	
 	public static void main(String[] args) {
-		
+		createProduct(31);
 	}
 }
