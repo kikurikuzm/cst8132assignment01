@@ -47,12 +47,12 @@ public class AmazonProductList {
 	}
 
 	public AmazonProduct findProductByIndex(int id) {
-
-		
+		AmazonProduct placeholder = new AmazonProduct(AmazonProductUtil.lineReader(null, 0));
+		return placeholder;
 	}
 
 	public int getSize() {
-
+		return 007;
 	}
 
 	public void add(AmazonProduct productToAdd) {
