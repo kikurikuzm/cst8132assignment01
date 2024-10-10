@@ -27,8 +27,18 @@ String imageURL, String link, float rating, int numberOfRatings, float discountP
 		this.actualPrice = actualPrice;
 	}
 	
-	AmazonProduct(String[] title){ //fix variable name when purpose determined
-		this.title = title;
+	// constructor that accepts returned lineReader string array to create product
+	AmazonProduct(String[] readerInfo){
+		this.id = Integer.parseInt(readerInfo[0]);
+		this.name = readerInfo[1];
+		new AmazonProductCategory(readerInfo[2]);
+		new AmazonProductSubCategory(readerInfo[3]);
+		this.imageURL = readerInfo[4];
+		this.link = readerInfo[5];
+		this.rating = Float.parseFloat(readerInfo[6]);
+		this.numberOfRatings = Integer.parseInt(readerInfo[7]);
+		this.discountPrice = Float.parseFloat(readerInfo[8]);
+		this.actualPrice = Float.parseFloat(readerInfo[9]);
 	}
 	
 	public float getActualPrice() {
