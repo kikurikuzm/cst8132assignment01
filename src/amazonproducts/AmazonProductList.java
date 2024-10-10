@@ -12,7 +12,7 @@ public class AmazonProductList {
 	// define array length from CSV columns:
 	private static final int NUMCOLS = Array.getLength(AmazonProductUtil.lineReader("Backpacks.csv", 0));
 	// pull column titles from CSV:
-	private final ArrayList<String> DEFAULT_TITLE = new ArrayList<>(Arrays.asList(AmazonProductUtil.lineReader("Backpacks.csv", 0)));
+	private final ArrayList<String> DEFAULT_TITLE = new ArrayList<>(Arrays.asList("ID","Name","Category","Subcategory","IMG URL","Link","Rating","# of Ratings","Sale Price","Actual Price"));
 	private ArrayList<AmazonProduct> bestsellers;
 
 	public void createList(String CSVFileName) throws AmazonProductException {
@@ -34,12 +34,16 @@ public class AmazonProductList {
 		}
 	}
 
-	public void saveList(String idk) {//argument??????
-
+	public void saveList(String newFileName) { // save product list to file
+		
 	}
 
-	public void printList() {
-
+	public void printList() { // display selected list
+		System.out.println("PRODUCT LIST");
+		
+		for (AmazonProduct i: bestsellers) {
+			System.out.println(i);
+		}
 	}
 
 	public void edit(int id, AmazonProduct product) {
