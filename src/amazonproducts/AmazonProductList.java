@@ -27,7 +27,7 @@ public class AmazonProductList {
 			while (reader.readLine() != null) productQuantity++; // count CSV lines
 			
 			for (int i = 0 ; i < productQuantity ; i++) {
-				bestsellers.add(i, AmazonProduct.AmazonProduct(AmazonProductUtil.lineReader(CSVFileName, i))); // store products starting from 0 index
+				bestsellers.add(i, (new AmazonProduct(AmazonProductUtil.lineReader(CSVFileName, i)))); // store products starting from 0 index
 			}
 		} catch (IOException e) {
 			throw new AmazonProductException("Product list creation error!"); // disaster strikes
