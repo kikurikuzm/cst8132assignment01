@@ -7,13 +7,15 @@ import java.io.IOException;
 import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Scanner;
 
 public class AmazonProductList {
 	// define array length from CSV columns:
 	private static final int NUMCOLS = Array.getLength(AmazonProductUtil.lineReader("Backpacks.csv", 0));
 	// pull column titles from CSV:
 	private final ArrayList<String> DEFAULT_TITLE = new ArrayList<>(Arrays.asList("ID","Name","Category","Subcategory","IMG URL","Link","Rating","# of Ratings","Sale Price","Actual Price"));
-	private ArrayList<AmazonProduct> bestsellers;
+	private ArrayList<AmazonProduct> myArrayList;
+	Scanner scan = new Scanner(System.in);
 
 	public void createList(String CSVFileName) throws AmazonProductException {
 		int productQuantity = 0;
@@ -27,7 +29,7 @@ public class AmazonProductList {
 			while (reader.readLine() != null) productQuantity++; // count CSV lines
 			
 			for (int i = 0 ; i < productQuantity ; i++) {
-				bestsellers.add(i, (new AmazonProduct(AmazonProductUtil.lineReader(CSVFileName, i)))); // store products starting from 0 index
+				myArrayList.add(i, (new AmazonProduct(AmazonProductUtil.lineReader(CSVFileName, i)))); // store products starting from 0 index
 			}
 		} catch (IOException e) {
 			throw new AmazonProductException("Product list creation error!"); // disaster strikes
@@ -41,13 +43,13 @@ public class AmazonProductList {
 	public void printList() { // display selected list
 		System.out.println("PRODUCT LIST");
 		
-		for (AmazonProduct i: bestsellers) {
+		for (AmazonProduct i: myArrayList) {
 			System.out.println(i);
 		}
 	}
 
 	public void edit(int id, AmazonProduct product) {
-
+		
 	}
 
 	public AmazonProduct findProductByIndex(int id) {
@@ -60,7 +62,7 @@ public class AmazonProductList {
 	}
 
 	public void add(AmazonProduct productToAdd) {
-
+		myArrayList.add(productToAdd);
 	}
 
 	public void delete(int id) {
