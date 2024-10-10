@@ -4,8 +4,8 @@ public class AmazonProductSubCategory {
 	private String subCategoryName;
 	private AmazonProductCategory category;
 	
-	AmazonProductSubCategory(String AmazonProductCategory) {
-		this.subCategoryName = AmazonProductCategory;
+	AmazonProductSubCategory(String givenName, AmazonProductCategory parentCategory) {
+		this.subCategoryName = givenName;
 	}
 	
 }
