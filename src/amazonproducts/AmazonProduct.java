@@ -31,8 +31,8 @@ String imageURL, String link, float rating, int numberOfRatings, float discountP
 	AmazonProduct(String[] readerInfo){
 		this.id = Integer.parseInt(readerInfo[0]);
 		this.name = readerInfo[1];
-		new AmazonProductCategory(readerInfo[2]);
-		new AmazonProductSubCategory(readerInfo[3]);
+		this.category = new AmazonProductCategory(readerInfo[2]);
+		this.subCategory = new AmazonProductSubCategory(readerInfo[3], this.category);
 		this.imageURL = readerInfo[4];
 		this.link = readerInfo[5];
 		this.rating = Float.parseFloat(readerInfo[6]);

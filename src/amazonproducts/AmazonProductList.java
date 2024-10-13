@@ -58,15 +58,19 @@ public class AmazonProductList {
 	}
 
 	public int getSize() {
-		return 007;
+		return 007; // placeholder return
 	}
 
 	public void add(AmazonProduct productToAdd) {
 		myArrayList.add(productToAdd);
 	}
 
-	public void delete(int id) {
-
+	public void delete(int index) throws AmazonProductException{
+		// id >= 0 && id < this.getSize()
+		
+		if (index >= 0 && index < myArrayList.size()){
+			myArrayList.remove(index);
+		} 
 	}
 
 	public void search(String productName) {//not sure if variable name is accurate
