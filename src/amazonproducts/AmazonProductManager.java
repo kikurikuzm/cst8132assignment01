@@ -175,7 +175,6 @@ public class AmazonProductManager {
 		String query = input.next();
 		productList.search(query);
 		
-		input.close();
 	}
 	
 	public void showMenu() {
