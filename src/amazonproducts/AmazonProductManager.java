@@ -170,7 +170,12 @@ public class AmazonProductManager {
 	}
 	
 	public void search() {
-		System.out.println("search for item in productlist");
+		Scanner input = new Scanner(System.in);
+		System.out.println("Search query for data in productlist:");
+		String query = input.next();
+		productList.search(query);
+		
+		input.close();
 	}
 	
 	public void showMenu() {

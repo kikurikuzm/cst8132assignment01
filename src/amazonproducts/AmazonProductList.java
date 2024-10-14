@@ -103,7 +103,13 @@ public class AmazonProductList {
 		myArrayList.remove(index);
 	}
 
-	public void search(String subString) {
+	public void search(String stringQuery) { // stringQuery = data being searched for in product data
 		
+		for (AmazonProduct i : myArrayList) {
+			if (i.toString().contains(stringQuery)) {
+				System.out.println(i);
+			}
+			
+		}
 	}
 }
