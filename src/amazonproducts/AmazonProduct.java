@@ -3,7 +3,7 @@ package amazonproducts;
 public class AmazonProduct {
 	private int id;
 	private String name;
-	private String[] title;
+	private String[] variableArray;
 	private AmazonProductCategory category;
 	private AmazonProductSubCategory subCategory;
 	private String imageURL;
@@ -26,9 +26,20 @@ String imageURL, String link, float rating, int numberOfRatings, float discountP
 		this.discountPrice = discountPrice;
 		this.actualPrice = actualPrice;
 	}
-	
-	AmazonProduct(String[] title){ //fix variable name when purpose determined
-		this.title = title;
+
+	AmazonProduct(String[] productVariables) {
+		this.variableArray = productVariables;
+		this.id = Integer.parseInt(productVariables[0]);
+		this.name = productVariables[1];
+		this.category = new AmazonProductCategory(productVariables[2]);
+		this.subCategory = new AmazonProductSubCategory(productVariables[3],this.category);
+		this.imageURL = productVariables[4];
+		this.link = productVariables[5];
+		this.rating = AmazonProductUtil.convertStringToFloat(productVariables[6]);
+		this.numberOfRatings = Integer.parseInt(productVariables[7].replace(",", ""));
+		this.discountPrice = AmazonProductUtil.convertStringToFloat(productVariables[8]);
+		this.actualPrice = AmazonProductUtil.convertStringToFloat(productVariables[9]);
+
 	}
 	
 	public float getActualPrice() {
@@ -70,18 +81,18 @@ String imageURL, String link, float rating, int numberOfRatings, float discountP
 		return this.imageURL;
 	}
 	
-	public String[] getTitle() {
-		return this.title;
+	public String[] getTitle() {//i dont know why its supposed to be called title :(
+		return this.variableArray;
 	}
 	
 	public void setTitle(String[] title) {
-		this.title = title;
+		this.variableArray = title;
 	}
 	
 	public String toString() {
-		return ("Product ID:" + this.id + ", Name: "+this.name+", Title: "+this.title+",Category: "+this.category+
-				", Subcategory: "+this.subCategory+", \nImage URL: "+this.imageURL+", \nProduct Page: "+this.link+
-				", \nRating: "+this.rating+", Number of ratings: "+this.numberOfRatings+", Discount Price: "+this.discountPrice+
-				", Normal Price: "+this.actualPrice);
+		return (String.valueOf(this.id) + ",\""+this.name+"\","+this.category.getCategory()+
+				","+this.subCategory.getSubCategory()+","+this.imageURL+","+this.link+
+				","+String.valueOf(this.rating)+","+String.valueOf(this.numberOfRatings)+","+String.valueOf(this.discountPrice)+
+				","+String.valueOf(this.actualPrice));
 	}
 }
